@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint --fix",
     "start": "electron ."
   },
   "keywords": [],
   "author": "Chayim Refael Friedman",
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
     "electron": "6.0.1",
+    "eslint": "^6.1.0",
     "typescript": "^3.5.3"
   }
 }
