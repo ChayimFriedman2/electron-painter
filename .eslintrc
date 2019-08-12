@@ -19,6 +19,7 @@
     "@typescript-eslint/await-thenable": "error",
     "@typescript-eslint/camelcase": "warn",
     "@typescript-eslint/class-name-casing": "warn",
+    "@typescript-eslint/no-parameter-properties": "off",
     "@typescript-eslint/explicit-member-accessibility": "warn",
     "@typescript-eslint/func-call-spacing": ["warn", "never"],
     "@typescript-eslint/generic-type-naming": [
@@ -173,7 +174,7 @@
     ],
     "no-class-assign": "off",
     "no-useless-computed-key": "error",
-    "no-useless-constructor": "error",
+    "no-useless-constructor": "off",
     "no-useless-rename": "error",
     "no-var": "warn",
     "object-shorthand": ["warn", "always", { "avoidQuotes": true }],
