@@ -10,4 +10,7 @@
 
   resizeSurface();
   window.addEventListener('resize', resizeSurface);
+
+  const Painter = require('./scripts/painter');
+  new Painter(surface);
 })(window, document);
