@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "lint": "eslint --fix",
+=======
+    "lint": "eslint",
+>>>>>>> e88c892571ee96db5f6f3acbaefe4ee574bc5ae2
     "start": "electron ."
   },
   "keywords": [],
