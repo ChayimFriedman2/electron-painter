@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "electron ."
   },
   "keywords": [],
   "author": "Chayim Refael Friedman",
