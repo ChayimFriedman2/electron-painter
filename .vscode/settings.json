@@ -1,5 +1,7 @@
 {
   "eslint.alwaysShowStatus": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
   "eslint.autoFixOnSave": true,
   "eslint.provideLintTask": true,
   "eslint.validate": [
