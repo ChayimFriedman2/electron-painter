@@ -1,73 +1,14 @@
 {
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2019,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+    "ecmaVersion": 5,
+    "sourceType": "script"
   },
-  "plugins": ["@typescript-eslint"],
   "env": {
-    "es6": true,
+    "es6": false,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "extends": ["eslint:recommended"],
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/indent": ["warn", 2],
-    "@typescript-eslint/adjacent-overload-signatures": "warn",
-    "@typescript-eslint/array-type": ["warn", "array"],
-    "@typescript-eslint/await-thenable": "error",
-    "@typescript-eslint/camelcase": "warn",
-    "@typescript-eslint/class-name-casing": "warn",
-    "@typescript-eslint/no-parameter-properties": "off",
-    "@typescript-eslint/explicit-member-accessibility": "warn",
-    "@typescript-eslint/func-call-spacing": ["warn", "never"],
-    "@typescript-eslint/generic-type-naming": [
-      "warn",
-      "^(T|T[A-Z][A-Za-z0-9$_]*)$"
-    ],
-    "@typescript-eslint/member-delimiter-style": [
-      "error",
-      {
-        "multiline": { "delimiter": "semi", "requireLast": true },
-        "singleline": { "delimiter": "semi", "requireLast": true }
-      }
-    ],
-    "@typescript-eslint/member-naming": ["warn", { "private": "^_" }],
-    "@typescript-eslint/no-empty-interface": [
-      "error",
-      { "allowSingleExtends": false }
-    ],
-    "@typescript-eslint/no-extraneous-class": "error",
-    "@typescript-eslint/no-for-in-array": "warn",
-    "@typescript-eslint/no-inferrable-types": "warn",
-    "@typescript-eslint/no-magic-numbers": "warn",
-    "@typescript-eslint/no-misused-new": "error",
-    "@typescript-eslint/no-misused-promises": [
-      "warn",
-      { "checksVoidReturn": false, "checksConditionals": true }
-    ],
-    "@typescript-eslint/no-require-imports": "warn",
-    "@typescript-eslint/no-unnecessary-type-assertion": "error",
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-use-before-define": "error",
-    "@typescript-eslint/no-useless-constructor": "error",
-    "@typescript-eslint/prefer-for-of": "warn",
-    "@typescript-eslint/prefer-function-type": "error",
-    "@typescript-eslint/prefer-includes": "warn",
-    "@typescript-eslint/prefer-string-starts-ends-with": "warn",
-    "@typescript-eslint/require-await": "warn",
-    "@typescript-eslint/semi": [
-      "error",
-      "always",
-      {
-        "omitLastInOneLineBlock": false
-      }
-    ],
-    "@typescript-eslint/triple-slash-reference": [
-      "error",
-      { "path": "never", "types": "never", "lib": "never" }
-    ],
     "getter-return": "error",
     "no-await-in-loop": "warn",
     "no-debugger": "error",

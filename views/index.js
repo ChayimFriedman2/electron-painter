@@ -7,3 +7,20 @@ function resizeSurface() {
 
 resizeSurface();
 window.addEventListener('resize', resizeSurface);
+
+/**
+ * @typedef {object} Point
+ * @property {number} x
+ * @property {number} y
+ */
+
+/**
+ * @typedef {object} Size
+ * @property {number} x
+ * @property {number} y
+ */
+
+ /**
+  * @typedef {string} Color
+  */
+
