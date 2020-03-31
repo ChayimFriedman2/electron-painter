@@ -1,18 +1,7 @@
 {
   "eslint.alwaysShowStatus": true,
   "editor.formatOnPaste": true,
-  "eslint.autoFixOnSave": true,
-  "eslint.provideLintTask": true,
-  "eslint.validate": [
-    {
-      "language": "javascript",
-      "autoFix": true
-    },
-    {
-      "language": "typescript",
-      "autoFix": true
-    }
-  ],
+  "eslint.lintTask.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }
