@@ -102,8 +102,10 @@
     "consistent-this": ["warn", "that"],
     "eol-last": "warn",
     "func-names": "off",
-    "func-style": ["warn", "declaration", { "allowArrowFunctions": true }],
-    "indent": ["warn", 2],
+    "func-style": "off",
+    "indent": ["warn", 2, {
+      "SwitchCase": 1
+    }],
     "quote-props": ["warn", "as-needed"],
     "quotes": [
       "warn",
@@ -122,8 +124,8 @@
     "no-useless-constructor": "off",
     "no-useless-rename": "error",
     "no-var": "off",
-    "object-shorthand": ["warn", "always", { "avoidQuotes": true }],
-    "prefer-arrow-callback": ["warn", { "allowNamedFunctions": true }],
+    "object-shorthand": "off",
+    "prefer-arrow-callback": "off",
     "prefer-destructuring": "off",
     "prefer-numeric-literals": "warn",
     "prefer-rest-params": "error",

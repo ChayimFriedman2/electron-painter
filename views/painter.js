@@ -6,18 +6,22 @@
   var ctx = surface.getContext('2d');
   var persistentCtx = persistentCanvas.getContext('2d');
 
+  function drawOnSurface() {
+    ctx.drawImage(persistentCtx, 0, 0, surface.width, surface.height);
+  }
+
   window.painter = {
     draw: function draw(shape) {
-      ctx.drawImage(persistentCtx, 0, 0, surface.width, surface.height);
-      if (shape) {
-        ctx.save();
-        shape.draw(ctx, window.colors.regular);
-        ctx.restore();
-      }
+      drawOnSurface();
+      ctx.save();
+      shape.draw(ctx, window.colors.regular);
+      ctx.restore();
     },
     persist: function persist(shape) {
+      ctx.save();
       shape.draw(persistentCtx, window.colors.regular);
-      this.draw();
+      ctx.restore();
+      drawOnSurface();
     },
     eraserSize: 5,
     erase: function erase(at) {
@@ -26,11 +30,11 @@
       persistentCtx.fillRect(at.x - (this.eraserSize / 2), at.y - (this.eraserSize / 2),
         this.eraserSize, this.eraserSize);
       ctx.restore();
-      this.draw();
+      drawOnSurface();
     },
     fill: function fill(at) {
       window.floodFill.fill(at.x, at.y, 0, persistentCtx);
-      this.draw();
+      drawOnSurface();
     }
   };
 })();
