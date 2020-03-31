@@ -1,5 +1,5 @@
 (function() {
-  var HANDLE_SIZE = 3, HANDLE_DRAG_DISTANCE = 6;
+  var HANDLE_SIZE = 6, HANDLE_DRAG_DISTANCE = 10;
 
   // eslint-disable-next-line no-extra-parens
   var surface = /** @type {HTMLCanvasElement} */ (window.surface);
@@ -82,17 +82,32 @@
     };
   }
 
+  /**
+   * Draws a dashed line.
+   * @param {number[]} dashStyle The dash style. Same type as `CanvasRenderingContext2D.setLineDash()` parameter.
+   * @param {typeof ctx.strokeStyle} normalColor The color to draw the second dashed part with.
+   * @param {typeof ctx.strokeStyle} dashedColor The color to draw the first dashed part with.
+   * @param {() => void} drawCallback Callback to actually draw the lines after the preparations.
+   */
+  function strokeDashed(dashStyle, normalColor, dashedColor, drawCallback) {
+    ctx.save();
+    ctx.strokeStyle = normalColor;
+    drawCallback();
+    ctx.strokeStyle = dashedColor;
+    ctx.setLineDash(dashStyle);
+    drawCallback();
+    ctx.restore();
+  }
+
   function drawBoundaries(boundaries) {
     ctx.save();
-    
-    ctx.strokeStyle = 'blue';
-    
-    ctx.setLineDash([3]);
-    ctx.strokeRect(boundaries.x, boundaries.y, boundaries.width, boundaries.height);
 
-    ctx.setLineDash([]);
+    ctx.lineWidth = 2;
+    strokeDashed([3], 'white', 'blue',
+      ctx.strokeRect.bind(ctx, boundaries.x, boundaries.y, boundaries.width, boundaries.height));
+
     ctx.fillStyle = 'white';
-
+    ctx.strokeStyle = 'blue';
     function drawHandle(at) {
       strokeFillRect(at.x - (HANDLE_SIZE / 2), at.y - (HANDLE_SIZE / 2), HANDLE_SIZE, HANDLE_SIZE);
     }
@@ -260,7 +275,7 @@
           setBottom();
           setLeft();
           break;
-        case 'bottomRight':
+        case 'bottom-right':
           setBottom();
           setRight();
           break;
