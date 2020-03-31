@@ -7,7 +7,8 @@
   var persistentCtx = persistentCanvas.getContext('2d');
 
   function drawOnSurface() {
-    ctx.drawImage(persistentCtx, 0, 0, surface.width, surface.height);
+    ctx.clearRect(0, 0, surface.width, surface.height);
+    ctx.drawImage(persistentCanvas, 0, 0, surface.width, surface.height);
   }
 
   window.painter = {

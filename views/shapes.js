@@ -9,15 +9,15 @@
     setBoundaries: function setBoundaries(boundaries) { this.boundaries = boundaries; }
   };
 
-  function newShape(draw) {
+  function newShapeType(draw) {
     var result = Object.create(baseShape);
     result.draw = draw;
     return result;
   }
 
   var shapeTypes = [
-    newShape(function drawRect(ctx) {
-      ctx.drawRect(this.boundaries.x, this.boundaries.y, this.boundaries.width, this.boundaries.height);
+    newShapeType(function drawRect(/** @type {CanvasRenderingContext2D} */ ctx) {
+      ctx.strokeRect(this.boundaries.x, this.boundaries.y, this.boundaries.width, this.boundaries.height);
     })
   ];
   currentType = shapeTypes[0];

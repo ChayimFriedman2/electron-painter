@@ -6,11 +6,15 @@
   var ctx = surface.getContext('2d');
 
   var shapeToPersist = null;
+  
   var draggedBoundaryHandle = null;
   /**
    * The distance from the mouse pointer to the center of the dragging handle, at the beginning of the drag.
    */
   var draggedBoundaryHandleDistance = null;
+
+  var currentlyDrawnShape = null;
+  var currentlyDrawnShapeStartPosition = null;
 
   function strokeFillRect(x, y, w, h) {
     ctx.fillRect(x, y, w, h);
@@ -58,19 +62,23 @@
       rect.y <= point.y && point.y <= (rect.y + rect.height);
   }
 
-  function rectCenter(rect) {
-    return {
-      x: rect.x + (rect.width / 2),
-      y: rect.y + (rect.height / 2)
-    };
-  }
-
   function squareFromCenter(center, edgeSize) {
     return {
       x: center.x - (edgeSize / 2),
       y: center.y - (edgeSize / 2),
       width: edgeSize,
       height: edgeSize
+    };
+  }
+
+  function twoPointsRect(a, b) {
+    var minX = Math.min(a.x, b.x), minY = Math.min(a.y, b.y),
+      maxX = Math.max(a.x, b.x), maxY = Math.max(a.y, b.y);
+    return {
+      x: minX,
+      y: minY,
+      width: maxX - minX,
+      height: maxY - minY
     };
   }
 
@@ -160,7 +168,7 @@
       return {
         onBoundaries: true,
         handle: 'center',
-        handleCenter: rectCenter(boundaries)
+        handleCenter: topLeftCorner(boundaries) // Because the boundaries are calculated from the top-left corner
       };
     } else {
       return {
@@ -169,18 +177,29 @@
     }
   }
 
+  function startDrawingNewShape(at) {
+    currentlyDrawnShapeStartPosition = at;
+    currentlyDrawnShape = window.shapes.newOfCurrentType(at);
+  }
+
   surface.addEventListener('mousedown', function onMouseDown(e) {
-    var draggedBoundary = boundaryHandleAt(shapeToPersist.getBoundaries(), { x: e.clientX, y: e.clientY });
-    if (!draggedBoundary.onBoundaries) {
-      draggedBoundaryHandle = null;
-      window.painter.persist(shapeToPersist);
-      shapeToPersist = null;
+    if (shapeToPersist) {
+      var draggedBoundary = boundaryHandleAt(shapeToPersist.getBoundaries(), { x: e.clientX, y: e.clientY });
+      if (!draggedBoundary.onBoundaries) {
+        draggedBoundaryHandle = null;
+        window.painter.persist(shapeToPersist);
+        shapeToPersist = null;
+
+        startDrawingNewShape({ x: e.clientX, y: e.clientY });
+      } else {
+        draggedBoundaryHandle = draggedBoundary.handle;
+        draggedBoundaryHandleDistance = {
+          x: e.clientX - draggedBoundary.handleCenter.x,
+          y: e.clientY - draggedBoundary.handleCenter.y
+        };
+      }
     } else {
-      draggedBoundaryHandle = draggedBoundary.handle;
-      draggedBoundaryHandleDistance = {
-        x: e.clientX - draggedBoundary.handleCenter.x,
-        y: e.clientY - draggedBoundary.handleCenter.y
-      };
+      startDrawingNewShape({ x: e.clientX, y: e.clientY });
     }
   }, false);
   surface.addEventListener('mousemove', function onMouseMove(e) {
@@ -194,22 +213,24 @@
 
       var setTop = function setTop() {
         if (ensureTop()) {
-          boundaries.y = e.clientY;
+          boundaries.height += boundaries.y - (e.clientY + draggedBoundaryHandleDistance.y);
+          boundaries.y = e.clientY + draggedBoundaryHandleDistance.y;
         }
       };
       var setBottom = function setBottom() {
         if (ensureBottom()) {
-          boundaries.height = e.clientY - boundaries.y;
+          boundaries.height = e.clientY - boundaries.y + draggedBoundaryHandleDistance.y;
         }
       };
       var setLeft = function setLeft() {
         if (ensureLeft()) {
-          boundaries.x = e.clientX;
+          boundaries.width += boundaries.x - (e.clientX + draggedBoundaryHandleDistance.x);
+          boundaries.x = e.clientX + draggedBoundaryHandleDistance.x;
         }
       };
       var setRight = function setRight() {
         if (ensureRight()) {
-          boundaries.width = e.clientX - boundaries.x;
+          boundaries.width = e.clientX - boundaries.x + draggedBoundaryHandleDistance.x;
         }
       };
       
@@ -243,24 +264,33 @@
           setBottom();
           setRight();
           break;
+
+        case 'center':
+          boundaries.x = e.clientX - draggedBoundaryHandleDistance.x;
+          boundaries.y = e.clientY - draggedBoundaryHandleDistance.y;
+          break;
       }
       shapeToPersist.setBoundaries(boundaries);
       window.painter.draw(shapeToPersist);
+      drawBoundaries(boundaries);
+    } else if (currentlyDrawnShape) {
+      currentlyDrawnShape.setBoundaries(
+        twoPointsRect({ x: e.clientX, y: e.clientY }, currentlyDrawnShapeStartPosition));
+      window.painter.draw(currentlyDrawnShape);
     }
   }, false);
-  surface.addEventListener('mouseup', function onMouseUp(e) {
+  surface.addEventListener('mouseup', function onMouseUp() {
+    if (currentlyDrawnShape) {
+      var boundaries = currentlyDrawnShape.getBoundaries();
+      if (boundaries.width > 0 && boundaries.height > 0) {
+        shapeToPersist = currentlyDrawnShape;
+        window.painter.draw(shapeToPersist);
+        drawBoundaries(boundaries);
+      }
+      currentlyDrawnShape = null;
+      currentlyDrawnShapeStartPosition = null;
+    }
+
     draggedBoundaryHandle = null;
   }, false);
-
-  function drawAndTrackBoundaries(shape) {
-    shapeToPersist = shape;
-    drawBoundaries(shape.getBoundaries());
-  }
-
-  window.userPainter = {
-    startDrawingShape: function startDrawingShape(shape) {
-      window.painter.draw(shape);
-      drawAndTrackBoundaries(shape);
-    }
-  };
 })();
