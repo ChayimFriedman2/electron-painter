@@ -16,6 +16,7 @@
       drawOnSurface();
       ctx.save();
       ctx.strokeStyle = window.colors.regular;
+      ctx.lineWidth = window.thickness;
       shape.draw(ctx);
       ctx.restore();
     },
