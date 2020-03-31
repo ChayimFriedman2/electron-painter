@@ -1,5 +1,12 @@
 (function() {
   var HANDLE_SIZE = 6, HANDLE_DRAG_DISTANCE = 10;
+  var HANDLES_CURSORS_MAP = {
+    top: 'ns-resize', bottom: 'ns-resize',
+    left: 'ew-resize', right: 'ew-resize',
+    'top-left': 'nwse-resize', 'bottom-right': 'nwse-resize',
+    'top-right': 'nesw-resize', 'bottom-left': 'nesw-resize',
+    center: 'move'
+  };
 
   // eslint-disable-next-line no-extra-parens
   var surface = /** @type {HTMLCanvasElement} */ (window.surface);
@@ -292,6 +299,9 @@
       currentlyDrawnShape.setBoundaries(
         twoPointsRect({ x: e.clientX, y: e.clientY }, currentlyDrawnShapeStartPosition));
       window.painter.draw(currentlyDrawnShape);
+    } else if (shapeToPersist) {
+      var hoverBoundary = boundaryHandleAt(shapeToPersist.getBoundaries(), { x: e.clientX, y: e.clientY });
+      surface.style.cursor = hoverBoundary.onBoundaries ? HANDLES_CURSORS_MAP[hoverBoundary.handle] : 'default';
     }
   }, false);
   surface.addEventListener('mouseup', function onMouseUp() {
