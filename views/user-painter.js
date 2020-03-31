@@ -245,6 +245,7 @@
           break;
       }
       shapeToPersist.setBoundaries(boundaries);
+      window.painter.draw(shapeToPersist);
     }
   }, false);
   surface.addEventListener('mouseup', function onMouseUp(e) {

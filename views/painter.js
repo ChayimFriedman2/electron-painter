@@ -14,12 +14,14 @@
     draw: function draw(shape) {
       drawOnSurface();
       ctx.save();
-      shape.draw(ctx, window.colors.regular);
+      ctx.strokeStyle = window.colors.regular;
+      shape.draw(ctx);
       ctx.restore();
     },
     persist: function persist(shape) {
       ctx.save();
-      shape.draw(persistentCtx, window.colors.regular);
+      ctx.strokeStyle = window.colors.regular;
+      shape.draw(persistentCtx);
       ctx.restore();
       drawOnSurface();
     },
