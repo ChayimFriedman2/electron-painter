@@ -1,5 +1,5 @@
 (function() {
-  var HANDLE_SIZE = 6, HANDLE_DRAG_DISTANCE = 10;
+  var HANDLE_SIZE = 6, HANDLE_DRAG_DISTANCE = 30;
   var HANDLES_CURSORS_MAP = {
     top: 'ns-resize', bottom: 'ns-resize',
     left: 'ew-resize', right: 'ew-resize',
@@ -235,24 +235,24 @@
 
       var setTop = function setTop() {
         if (ensureTop()) {
-          boundaries.height += boundaries.y - (e.clientY + draggedBoundaryHandleDistance.y);
-          boundaries.y = e.clientY + draggedBoundaryHandleDistance.y;
+          boundaries.height += boundaries.y - (e.clientY - draggedBoundaryHandleDistance.y);
+          boundaries.y = e.clientY - draggedBoundaryHandleDistance.y;
         }
       };
       var setBottom = function setBottom() {
         if (ensureBottom()) {
-          boundaries.height = e.clientY - boundaries.y + draggedBoundaryHandleDistance.y;
+          boundaries.height = e.clientY - (boundaries.y - draggedBoundaryHandleDistance.y);
         }
       };
       var setLeft = function setLeft() {
         if (ensureLeft()) {
-          boundaries.width += boundaries.x - (e.clientX + draggedBoundaryHandleDistance.x);
-          boundaries.x = e.clientX + draggedBoundaryHandleDistance.x;
+          boundaries.width += boundaries.x - (e.clientX - draggedBoundaryHandleDistance.x);
+          boundaries.x = e.clientX - draggedBoundaryHandleDistance.x;
         }
       };
       var setRight = function setRight() {
         if (ensureRight()) {
-          boundaries.width = e.clientX - boundaries.x + draggedBoundaryHandleDistance.x;
+          boundaries.width = e.clientX - (boundaries.x - draggedBoundaryHandleDistance.x);
         }
       };
       
