@@ -1,3 +1,3 @@
-(function(window, document) {
+(function() {
   window.colors = { regular: 'black', erasure: 'white' };
-})(window, document);
+})();

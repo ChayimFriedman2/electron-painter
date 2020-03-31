@@ -1,2 +1,1 @@
-dist/**/*
-views/index.js
+node_modules

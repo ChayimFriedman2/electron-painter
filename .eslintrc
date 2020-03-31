@@ -5,7 +5,8 @@
   },
   "env": {
     "es6": false,
-    "node": true
+    "node": true,
+    "browser": true
   },
   "extends": ["eslint:recommended"],
   "rules": {
@@ -19,7 +20,10 @@
     "no-duplicate-imports": "error",
     "no-ex-assign": "warn",
     "no-extra-boolean-cast": "warn",
-    "no-extra-parens": "warn",
+    "no-extra-parens": ["warn", "all", {
+      "conditionalAssign": false,
+      "nestedBinaryExpressions": false
+    }],
     "no-extra-semi": "warn",
     "no-invalid-regexp": "error",
     "no-irregular-whitespace": "warn",
@@ -33,7 +37,7 @@
     "valid-typeof": "error",
     "array-callback-return": "warn",
     "class-methods-use-this": "warn",
-    "complexity": ["warn", 20],
+    "complexity": "off",
     "block-scoped-var": "error",
     "consistent-return": "warn",
     "curly": "warn",
@@ -58,7 +62,7 @@
     "no-labels": "error",
     "no-lone-blocks": "warn",
     "no-loop-func": "warn",
-    "no-magic-numbers": "warn",
+    "no-magic-numbers": "off",
     "no-multi-spaces": "warn",
     "no-new-func": "warn",
     "no-new-wrappers": "warn",
@@ -83,7 +87,7 @@
     "no-with": "error",
     "prefer-promise-reject-errors": "error",
     "require-await": "warn",
-    "wrap-iife": "warn",
+    "wrap-iife": ["warn", "inside"],
     "yoda": ["warn", "always"],
     "no-delete-var": "warn",
     "no-label-var": "error",
@@ -97,7 +101,7 @@
     "capitalized-comments": ["warn", "always"],
     "consistent-this": ["warn", "that"],
     "eol-last": "warn",
-    "func-names": ["warn", "always"],
+    "func-names": "off",
     "func-style": ["warn", "declaration", { "allowArrowFunctions": true }],
     "indent": ["warn", 2],
     "quote-props": ["warn", "as-needed"],
@@ -117,14 +121,10 @@
     "no-useless-computed-key": "error",
     "no-useless-constructor": "off",
     "no-useless-rename": "error",
-    "no-var": "warn",
+    "no-var": "off",
     "object-shorthand": ["warn", "always", { "avoidQuotes": true }],
     "prefer-arrow-callback": ["warn", { "allowNamedFunctions": true }],
-    "prefer-destructuring": [
-      "warn",
-      { "array": true, "object": true },
-      { "enforceForRenamedProperties": true }
-    ],
+    "prefer-destructuring": "off",
     "prefer-numeric-literals": "warn",
     "prefer-rest-params": "error",
     "prefer-spread": "warn",

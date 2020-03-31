@@ -1,5 +1,7 @@
-(function(window, document) {
+(function() {
+  // eslint-disable-next-line no-extra-parens
   var surface = /** @type {HTMLCanvasElement} */ (window.surface);
+  // eslint-disable-next-line no-extra-parens
   var persistentCanvas = /** @type {HTMLCanvasElement} */ (window.persistentCanvas);
   var ctx = surface.getContext('2d');
   var persistentCtx = persistentCanvas.getContext('2d');
@@ -27,8 +29,8 @@
       this.draw();
     },
     fill: function fill(at) {
-      floodFill.fill(at.x, at.y, 0, persistentCtx);
+      window.floodFill.fill(at.x, at.y, 0, persistentCtx);
       this.draw();
     }
   };
-})(window, document);
+})();

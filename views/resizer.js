@@ -1,4 +1,5 @@
-(function(window, document) {
+(function() {
+  // eslint-disable-next-line no-extra-parens
   var surface = /** @type {HTMLCanvasElement} */ (document.getElementById('surface'));
   var persistentCanvas = document.createElement('canvas');
 
@@ -12,4 +13,4 @@
 
   window.surface = surface;
   window.persistentCanvas = persistentCanvas;
-})(window, document);
+})();
