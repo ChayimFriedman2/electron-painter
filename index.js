@@ -8,6 +8,7 @@ function createWindow() {
       nodeIntegration: true
     }
   });
+  wnd.removeMenu();
   wnd.loadFile('views/index.html');
   wnd.on('closed', function wndClosed() {
     wnd = null;
