@@ -1,6 +1,6 @@
 (function(window, document) {
-  const surface = /** @type {HTMLCanvasElement} */ (document.getElementById('surface'));
-  const persistentCanvas = document.createElement('canvas');
+  var surface = /** @type {HTMLCanvasElement} */ (document.getElementById('surface'));
+  var persistentCanvas = document.createElement('canvas');
 
   function resizeSurface() {
     surface.width = persistentCanvas.width = window.innerWidth;
