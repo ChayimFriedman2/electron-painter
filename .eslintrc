@@ -90,7 +90,7 @@
     "yoda": "off",
     "no-delete-var": "warn",
     "no-label-var": "error",
-    "no-shadow": "warn",
+    "no-shadow": "off",
     "no-undef": "error",
     "no-undef-init": "warn",
     "no-use-before-define": "error",

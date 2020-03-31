@@ -11,20 +11,21 @@
     ctx.drawImage(persistentCanvas, 0, 0, surface.width, surface.height);
   }
 
+  function drawShape(ctx, shape) {
+    ctx.save();
+    ctx.strokeStyle = window.colors.regular;
+    ctx.lineWidth = window.thickness;
+    shape.draw(ctx);
+    ctx.restore();
+  }
+
   window.painter = {
     draw: function draw(shape) {
       drawOnSurface();
-      ctx.save();
-      ctx.strokeStyle = window.colors.regular;
-      ctx.lineWidth = window.thickness;
-      shape.draw(ctx);
-      ctx.restore();
+      drawShape(ctx, shape);
     },
     persist: function persist(shape) {
-      ctx.save();
-      ctx.strokeStyle = window.colors.regular;
-      shape.draw(persistentCtx);
-      ctx.restore();
+      drawShape(persistentCtx, shape);
       drawOnSurface();
     },
     eraserSize: 5,
