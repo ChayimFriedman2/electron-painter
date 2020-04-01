@@ -67,3 +67,104 @@ body {
   border-color: #1979ca;
   color: white;
 }
+
+.tab.file.visible {
+  background-color: #1268b3;
+  border-color: #1268b3;
+}
+
+.file-menu {
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  border: 1px solid #6b6b6b;
+  z-index: 3;
+  height: 400px;
+  transition: opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.file-menu.visible {
+  transition: opacity 0s, visibility 0s;
+  opacity: 1;
+  visibility: visible;
+}
+
+.file-menu-actions {
+  background-color: #fbfcfd;
+  border-right: 1px solid #9b9b9b;
+  float: left;
+  width: 250px;
+  height: 100%;
+}
+
+.file-menu-recent {
+  background-color: #f6f7f8;
+  float: left;
+  width: 150px;
+  height: 100%;
+}
+
+.file-menu-separator {
+  width: 100%;
+  height: 1px;
+  margin-left: 42px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  background-color: #bebebe;
+}
+
+.file-menu-action {
+  height: 44px;
+  width: 100%;
+  padding: 7px;
+}
+
+.file-menu-action:hover {
+  background-color: #edf4fc;
+  border: 1px solid rgb(192, 213, 238);
+  padding: 6px;
+}
+
+.file-menu-action.expand-arrow-hover {
+  background-color: transparent;
+  border: 1px solid rgb(192, 213, 238);
+  padding: 6px;
+}
+
+.file-menu-action-icon {
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-right: 10px;
+}
+
+.file-menu-action-text {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+.file-menu-action-expand-subactions-arrow {
+  background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" height="15" width="10"%3E%3Cpolygon points="0,0 7,7 0,14" style="fill:%23000;stroke-width:0"%3E%3C/polygon%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 8px 12px;
+  float: right;
+  height: 42px;
+  width: 22px;
+  position: relative;
+  top: -6px;
+  right: -6px;
+}
+
+.file-menu-action-expand-subactions-arrow:hover {
+  background-color: #edf4fc;
+}
+
+.file-menu-action:hover .file-menu-action-expand-subactions-arrow {
+  border-left: 1px solid rgb(192, 213, 238);
+  width: 23px;
+}

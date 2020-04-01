@@ -97,7 +97,7 @@
     "block-spacing": "warn",
     "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
     "camelcase": "warn",
-    "capitalized-comments": ["warn", "always"],
+    "capitalized-comments": "off",
     "consistent-this": ["warn", "that"],
     "eol-last": "warn",
     "func-names": "off",
