@@ -4,6 +4,7 @@ let wnd = null;
 
 function createWindow() {
   wnd = new BrowserWindow({
+    icon: 'icon.png',
     webPreferences: {
       nodeIntegration: true
     }
