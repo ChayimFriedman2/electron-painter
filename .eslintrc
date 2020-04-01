@@ -129,7 +129,7 @@
     "prefer-numeric-literals": "warn",
     "prefer-rest-params": "error",
     "prefer-spread": "warn",
-    "prefer-template": "warn",
+    "prefer-template": "off",
     "require-yield": "warn",
     "rest-spread-spacing": ["warn", "never"],
     "sort-imports": "warn",
