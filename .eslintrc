@@ -65,7 +65,7 @@
     "no-multi-spaces": "warn",
     "no-new-func": "warn",
     "no-new-wrappers": "warn",
-    "no-param-reassign": "warn",
+    "no-param-reassign": "off",
     "no-proto": "error",
     "no-redeclare": "off",
     "no-return-assign": "warn",

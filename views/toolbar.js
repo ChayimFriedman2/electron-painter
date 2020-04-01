@@ -10,27 +10,30 @@
 
   var activeTab = 'Home';
 
-  function addTab(onView, text, className) {
+  function addTab(onView, text, className, activatable) {
+    activatable = activatable === undefined ? true : activatable;
     var element = document.createElement('div');
     element.className = className ? 'tab ' + className : 'tab';
     element.textContent = text;
     tabsView.appendChild(element);
     element.addEventListener('click', function() {
       if (activeTab !== text) {
-        activeTab = text;
-        tabsView.childNodes.forEach(function(tab) {
-          if (tab === element) {
-            tab.classList.add('active');
-          } else {
-            tab.classList.remove('active');
-          }
-        });
+        if (activatable) {
+          activeTab = text;
+          tabsView.childNodes.forEach(function(tab) {
+            if (tab === element) {
+              tab.classList.add('active');
+            } else {
+              tab.classList.remove('active');
+            }
+          }); 
+        }
         onView();
       }
     }, false);
   }
 
-  addTab(Function.prototype, 'File', 'file');
+  addTab(Function.prototype, 'File', 'file', false);
   addTab(Function.prototype, 'Home', 'active');
   addTab(Function.prototype, 'View');
 
