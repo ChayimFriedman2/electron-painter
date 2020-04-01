@@ -22,6 +22,7 @@
   toolbarElement.appendChild(currentTab);
 
   var activeTab = 'Home';
+  var tabs = Object.create(null);
 
   function addTab(text, className, activatable, callback, onActivate) {
     activatable = activatable === undefined ? true : activatable;
@@ -50,11 +51,18 @@
     if (callback) {
       callback(element);
     }
+
+    tabs[text] = element;
+  }
+
+  function removeTab(text) {
+    tabs[text].parentNode.removeChild(tabs[text]);
+    delete tabs[text];
   }
 
   document.body.appendChild(toolbarElement);
 
-  //#endregion Tab Management
+  //#endregion
 
   //#region File Menu
 
@@ -196,34 +204,9 @@
       }
       fileItems[index].disabled = !enabled;
       rerenderFileMenu();
-    }
-  };
+    },
 
-  window.toolbar.addFileAction({
-    icon: 'icons/new-file.svg',
-    caption: 'New',
-    onClick: Function.prototype
-  }, 0);
-  window.toolbar.addFileAction({
-    icon: 'icons/open-file.svg',
-    caption: 'Open',
-    onClick: Function.prototype
-  }, 1);
-  window.toolbar.addFileAction({
-    icon: 'icons/save-file.svg',
-    caption: 'Save',
-    onClick: Function.prototype
-  }, 2);
-  window.toolbar.addFileAction({
-    icon: 'icons/save-file.svg',
-    caption: 'Save as',
-    onClick: Function.prototype,
-    showSubactions: Function.prototype
-  }, 3);
-  window.toolbar.addFileSeparator(4);
-  window.toolbar.addFileAction({
-    icon: 'icons/print.svg',
-    caption: 'Print',
-    onClick: Function.prototype
-  }, 5);
+    addTab: addTab,
+    removeTab: removeTab
+  };
 })();
