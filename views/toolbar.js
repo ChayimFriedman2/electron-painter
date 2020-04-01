@@ -125,6 +125,9 @@
       } else if (item) {
         var action = document.createElement('div');
         action.className = 'file-menu-action';
+        if (item.disabled) {
+          action.className += ' disabled';
+        }
 
         var icon;
         if (item.icon) {
@@ -180,6 +183,18 @@
     },
     addFileSeparator: function addFileSeparator(index) {
       fileItems[index] = 'separator';
+      rerenderFileMenu();
+    },
+    removeFileItem: function removeFileItem(index) {
+      fileItems[index] = undefined;
+      rerenderFileMenu();
+    },
+    setFileActionEnabled: function setFileActionDisabled(index, enabled) {
+      enabled = enabled === undefined ? true : enabled;
+      if (fileItems[index] === 'separator') {
+        throw new Error('Cannot disable/enable separators');
+      }
+      fileItems[index].disabled = !enabled;
       rerenderFileMenu();
     }
   };
