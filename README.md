@@ -24,4 +24,4 @@ Powered by [Electron.js](https://electronjs.org).
 
 If you have VS Code, simply press Ctrl/Command+F5 or go to Debug->Start Without Debugging.
 
-If not, run `./node_modules/.bin/tsc` (or, for Windows, `node_modules/.bin/tsc.cmd`) and then `npm run start` in the terminal.
+If not, run `npm start` in the terminal.
