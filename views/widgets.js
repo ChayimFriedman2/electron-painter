@@ -19,16 +19,23 @@
     create: function createWidget() {
       var result = Object.create(this);
       result.init.apply(result, arguments);
+      if (result.render === widget.render) {
+        // Cache render result only if render() wasn't overridden
+        result.__element = result.renderCore();
+      }
       return result;
     },
     init: Function.prototype,
-    render: function renderWidget() {
-      throw new Error('This function must be implemented in child classes');
+    render: function optimizedRenderWidget() {
+      return this.__element;
+    },
+    renderCore: function renderWidget() {
+      throw new Error('This function should be implemented in child classes');
     }
   };
   
-  function createWidgetKind(properties) {
-    return Object.assign(Object.create(widget), properties);
+  function createWidgetKind(properties, baseClass) {
+    return Object.assign(Object.create(baseClass || widget), properties);
   }
 
   //#endregion
